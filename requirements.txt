@@ -2,3 +2,5 @@ fastapi
 uvicorn
 qrcode[pil]
 requests
+Pillow
+python-multipart
