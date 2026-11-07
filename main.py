@@ -7,7 +7,6 @@ from PIL import Image
 
 app = FastAPI()
 
-# Replace this placeholder with the actual secret you copied from RapidAPI
 RAPIDAPI_SECRET = "eb03b0c0-da81-11f1-99c9-110b92c3f9d6"
 
 @app.get("/generate")
@@ -18,8 +17,10 @@ async def generate_qr(
     logo_url: str = None,
     x_rapidapi_proxy_secret: str = Header(None)
 ):
-    # Security Check: Block direct access
-    if x_rapidapi_proxy_secret != eb03b0c0-da81-11f1-99c9-110b92c3f9d6:
+    # Allow UptimeRobot keep-awake pings through without a RapidAPI secret
+    if data == "ping":
+        pass
+    elif x_rapidapi_proxy_secret != eb03b0c0-da81-11f1-99c9-110b92c3f9d6:
         raise HTTPException(status_code=401, detail="Unauthorized. Please use the RapidAPI hub to access this service.")
 
     try:
